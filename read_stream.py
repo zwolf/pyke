@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from __future__ import print_function
 
 import sys
@@ -17,9 +19,6 @@ iter_type_after = 'AFTER_SEQUENCE_NUMBER'
 iter_type_trim = 'TRIM_HORIZON'
 iter_type_latest = 'LATEST'
 
-EGG_PATTERN = re.compile('egg')
-
-
 def print_annotations(records):
     for record in records:
         parsed_json = json.loads(record['Data'])
@@ -35,8 +34,7 @@ def echo_records(records):
             print (ue.message)
 
 def sum_posts(kinesis_actors):
-    """Sum all posts across an array of KinesisPosters
-    """
+    """Sum all posts across an array of KinesisPosters """
     total_records = 0
     for actor in kinesis_actors:
         total_records += actor.total_records
@@ -92,7 +90,7 @@ class KinesisWorker(threading.Thread):
 
 if __name__ == '__main__':
 
-  # `python read_stream.py zooniverse-production --worker_time 10 --echo
+    # `python read_stream.py zooniverse-production --worker_time 10 --echo
 
     parser = argparse.ArgumentParser(
         description='''Create or connect to a Kinesis stream and create workers
